@@ -1,12 +1,16 @@
-FROM openjdk:11 AS build
+#
+# Build stage
+#
+FROM maven:3.8.3-openjdk-17 AS build
 WORKDIR /app
-COPY . .
-RUN apt-get update && apt-get install -y maven
-RUN mvn clean package -DskipTests
+COPY . /app/
+RUN mvn clean package
 
-FROM openjdk:11-jdk-slim
-COPY --from=build /app/target/examserver.jar app.jar
+#
+# Package stage
+#
+FROM openjdk:17-alpine
+WORKDIR /app
+COPY --from=build /app/target/examserver.jar /app/app.jar
 EXPOSE 8081
-ENTRYPOINT ["java", "-jar", "/app.jar"]
-
-
+ENTRYPOINT ["java","-jar","app.jar"]

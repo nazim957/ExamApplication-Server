@@ -33,6 +33,12 @@ public class QuestionController {
         headers.set("Authorization", jwtToken);
         HttpEntity<?> entity = new HttpEntity<>(headers);
 
+//        return restTemplate.exchange(
+//                "http://localhost:8080/validate",
+//                HttpMethod.GET,
+//                entity,
+//                Void.class
+//        );
         return restTemplate.exchange(
                 "http://localhost:8080/validate",
                 HttpMethod.GET,

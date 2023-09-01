@@ -28,6 +28,11 @@ public class AuthController {
         headers.set("Authorization", jwtToken);
         HttpEntity<?> entity = new HttpEntity<>(headers);
 
+//        return restTemplate.exchange(
+//                "http://localhost:8080/validate",
+//                HttpMethod.GET,
+//                entity,
+//                Void.class
         return restTemplate.exchange(
                 "http://localhost:8080/validate",
                 HttpMethod.GET,
@@ -38,6 +43,8 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody JwtRequest jwtRequest) throws Exception {
+//        ResponseEntity<JwtResponse> response = restTemplate.postForEntity(
+//                "http://localhost:8080/generate-token", jwtRequest, JwtResponse.class);
         ResponseEntity<JwtResponse> response = restTemplate.postForEntity(
                 "http://localhost:8080/generate-token", jwtRequest, JwtResponse.class);
 
@@ -50,6 +57,7 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody User user){
 
+      //  ResponseEntity<User> userResponseEntity = restTemplate.postForEntity("http://localhost:8080/user/", user, User.class);
         ResponseEntity<User> userResponseEntity = restTemplate.postForEntity("http://localhost:8080/user/", user, User.class);
         HttpStatus statusCode = userResponseEntity.getStatusCode();
         logger.info("Status Code: {}",statusCode);
@@ -74,6 +82,12 @@ public class AuthController {
             HttpEntity<?> entity = new HttpEntity<>(headers);
 
             ParameterizedTypeReference<Map<String, Object>> responseType = new ParameterizedTypeReference<Map<String, Object>>() {};
+//            ResponseEntity<Map<String, Object>> userEntity = restTemplate.exchange(
+//                    "http://localhost:8080/current-user",
+//                    HttpMethod.GET,
+//                    entity,
+//                    responseType
+//            );
             ResponseEntity<Map<String, Object>> userEntity = restTemplate.exchange(
                     "http://localhost:8080/current-user",
                     HttpMethod.GET,
