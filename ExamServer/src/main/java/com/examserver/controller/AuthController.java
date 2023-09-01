@@ -34,7 +34,7 @@ public class AuthController {
 //                entity,
 //                Void.class
         return restTemplate.exchange(
-                "http://localhost:8080/validate",
+                "https://usermanagementserver-j4xg.onrender.com/validate",
                 HttpMethod.GET,
                 entity,
                 Void.class
@@ -46,7 +46,7 @@ public class AuthController {
 //        ResponseEntity<JwtResponse> response = restTemplate.postForEntity(
 //                "http://localhost:8080/generate-token", jwtRequest, JwtResponse.class);
         ResponseEntity<JwtResponse> response = restTemplate.postForEntity(
-                "http://localhost:8080/generate-token", jwtRequest, JwtResponse.class);
+                "https://usermanagementserver-j4xg.onrender.com/generate-token", jwtRequest, JwtResponse.class);
 
         JwtResponse jwtResponse = response.getBody();
       //jwtTokenService.setJwtToken(jwtResponse.getToken());
@@ -58,7 +58,7 @@ public class AuthController {
     public ResponseEntity<?> register(@RequestBody User user){
 
       //  ResponseEntity<User> userResponseEntity = restTemplate.postForEntity("http://localhost:8080/user/", user, User.class);
-        ResponseEntity<User> userResponseEntity = restTemplate.postForEntity("http://localhost:8080/user/", user, User.class);
+        ResponseEntity<User> userResponseEntity = restTemplate.postForEntity("https://usermanagementserver-j4xg.onrender.com/user/", user, User.class);
         HttpStatus statusCode = userResponseEntity.getStatusCode();
         logger.info("Status Code: {}",statusCode);
         User user1 = userResponseEntity.getBody();
@@ -89,7 +89,7 @@ public class AuthController {
 //                    responseType
 //            );
             ResponseEntity<Map<String, Object>> userEntity = restTemplate.exchange(
-                    "http://localhost:8080/current-user",
+                    "https://usermanagementserver-j4xg.onrender.com/current-user",
                     HttpMethod.GET,
                     entity,
                     responseType

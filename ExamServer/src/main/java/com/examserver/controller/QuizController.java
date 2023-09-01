@@ -35,7 +35,7 @@ public class QuizController {
 //                Void.class
 //        );
         return restTemplate.exchange(
-                "http://localhost:8080/validate",
+                "https://usermanagementserver-j4xg.onrender.com/validate",
                 HttpMethod.GET,
                 entity,
                 Void.class
